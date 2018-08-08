@@ -45,6 +45,7 @@ public class EditActivity extends AppCompatActivity implements
     private EditText quantityEditText;
     private Button increaseQuantity;
     private Button decreaseQuantity;
+    private Button callSupplier;
 
     private int category = BookEntry.CATEGORY_UNKNOWN;
 
@@ -95,6 +96,7 @@ public class EditActivity extends AppCompatActivity implements
         quantityEditText = findViewById(R.id.edit_book_quantity);
         increaseQuantity = findViewById(R.id.increase_btn);
         decreaseQuantity = findViewById(R.id.decrease_btn);
+        callSupplier = findViewById(R.id.call_btn);
 
         increaseQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +116,20 @@ public class EditActivity extends AppCompatActivity implements
                     i--;
                 }
                 quantityEditText.setText(String.valueOf(i));
+            }
+        });
+
+        callSupplier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    String uri = "tel:" + supplierPhoneEditText.getText().toString().trim();
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse(uri));
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(v.getContext(), R.string.call_error, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

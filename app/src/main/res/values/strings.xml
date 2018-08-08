@@ -20,6 +20,8 @@
     <string name="increase_value">increase</string>
     <string name="decrease_value">decrease</string>
 
+    <string name="call_supplier">Call supplier</string>
+
     <string name="category_open">Open</string>
     <string name="category_mature">Mature</string>
     <string name="category_unknown">Unknown</string>
@@ -41,4 +43,5 @@
     <string name="cancel">Cancel</string>
     <string name="delete_book_failed">Error with deleting book.</string>
     <string name="delete_book_successful">Book deleted.</string>
+    <string name="call_error">Could not call the supplier, try manually.</string>
 </resources>

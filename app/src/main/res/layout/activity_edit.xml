@@ -16,30 +16,30 @@
 
         <!-- Label -->
         <TextView
-            android:text="@string/book_overview"
-            style="@style/CategoryStyle" />
+            style="@style/CategoryStyle"
+            android:text="@string/book_overview" />
 
         <!-- Input fields -->
         <LinearLayout
-            android:layout_height="wrap_content"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:paddingLeft="4dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingLeft="4dp">
 
             <!-- Name field -->
             <EditText
                 android:id="@+id/edit_book_name"
+                style="@style/EditorFieldStyle"
                 android:hint="@string/book_hint_name"
-                android:inputType="textCapWords"
-                style="@style/EditorFieldStyle" />
+                android:inputType="textCapWords" />
 
             <!-- Breed field -->
             <EditText
                 android:id="@+id/edit_book_author"
+                style="@style/EditorFieldStyle"
                 android:hint="@string/book_hint_author"
-                android:inputType="textCapWords"
-                style="@style/EditorFieldStyle" />
+                android:inputType="textCapWords" />
         </LinearLayout>
     </LinearLayout>
 
@@ -51,21 +51,21 @@
 
         <!-- Label -->
         <TextView
-            android:text="@string/book_category"
-            style="@style/CategoryStyle" />
+            style="@style/CategoryStyle"
+            android:text="@string/book_category" />
 
         <!-- Input field -->
         <LinearLayout
-            android:layout_height="wrap_content"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
             android:orientation="vertical">
 
             <!-- Gender drop-down spinner -->
             <Spinner
                 android:id="@+id/spinner_category"
-                android:layout_height="48dp"
                 android:layout_width="wrap_content"
+                android:layout_height="48dp"
                 android:paddingRight="16dp"
                 android:spinnerMode="dropdown"/>
         </LinearLayout>
@@ -79,22 +79,22 @@
 
         <!-- Label -->
         <TextView
-            android:text="@string/book_supplier"
-            style="@style/CategoryStyle" />
+            style="@style/CategoryStyle"
+            android:text="@string/book_supplier" />
 
         <!-- Input fields -->
         <RelativeLayout
-            android:layout_height="wrap_content"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
             android:paddingLeft="4dp">
 
             <!-- Weight field -->
             <EditText
                 android:id="@+id/edit_supplier"
+                style="@style/EditorFieldStyle"
                 android:hint="@string/book_supplier"
-                android:inputType="number"
-                style="@style/EditorFieldStyle" />
+                android:inputType="number" />
 
         </RelativeLayout>
     </LinearLayout>
@@ -107,22 +107,22 @@
 
         <!-- Label -->
         <TextView
-            android:text="@string/book_supplier_phone"
-            style="@style/CategoryStyle" />
+            style="@style/CategoryStyle"
+            android:text="@string/book_supplier_phone" />
 
         <!-- Input fields -->
         <RelativeLayout
-            android:layout_height="wrap_content"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
             android:paddingLeft="4dp">
 
             <!-- Weight field -->
             <EditText
                 android:id="@+id/edit_supplier_phone"
+                style="@style/EditorFieldStyle"
                 android:hint="@string/book_supplier_phone"
-                android:inputType="number"
-                style="@style/EditorFieldStyle" />
+                android:inputType="number" />
 
         </RelativeLayout>
     </LinearLayout>
@@ -136,22 +136,22 @@
 
         <!-- Label -->
         <TextView
-            android:text="@string/book_price"
-            style="@style/CategoryStyle" />
+            style="@style/CategoryStyle"
+            android:text="@string/book_price" />
 
         <!-- Input fields -->
         <RelativeLayout
-            android:layout_height="wrap_content"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
             android:paddingLeft="4dp">
 
             <!-- Weight field -->
             <EditText
                 android:id="@+id/edit_book_price"
+                style="@style/EditorFieldStyle"
                 android:hint="@string/book_price"
-                android:inputType="number"
-                style="@style/EditorFieldStyle" />
+                android:inputType="number" />
 
         </RelativeLayout>
     </LinearLayout>
@@ -164,22 +164,22 @@
 
         <!-- Label -->
         <TextView
-            android:text="@string/book_quantity"
-            style="@style/CategoryStyle" />
+            style="@style/CategoryStyle"
+            android:text="@string/book_quantity" />
 
         <!-- Input fields -->
         <RelativeLayout
-            android:layout_height="wrap_content"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
             android:paddingLeft="4dp">
 
             <!-- Weight field -->
             <EditText
                 android:id="@+id/edit_book_quantity"
+                style="@style/EditorFieldStyle"
                 android:hint="@string/book_quantity"
-                android:inputType="number"
-                style="@style/EditorFieldStyle" />
+                android:inputType="number" />
 
         </RelativeLayout>
     </LinearLayout>
@@ -187,23 +187,31 @@
     <LinearLayout
         android:id="@+id/container_buttons"
         android:layout_width="match_parent"
-        android:layout_gravity="center"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="horizontal">
         <Button
             android:id="@+id/decrease_btn"
-            android:layout_margin="@dimen/mediumMargin"
-            android:text="@string/decrease_value"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mediumMargin"
+            android:text="@string/decrease_value" />
 
         <Button
             android:id="@+id/increase_btn"
-            android:layout_margin="@dimen/mediumMargin"
-            android:text="@string/increase_value"
-            android:gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mediumMargin"
+            android:gravity="center"
+            android:text="@string/increase_value" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/call_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/mediumMargin"
+        android:gravity="center"
+        android:text="@string/call_supplier"/>
 </LinearLayout>
