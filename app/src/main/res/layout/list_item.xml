@@ -36,8 +36,6 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginEnd="@dimen/mediumMargin"
-        android:layout_marginRight="@dimen/mediumMargin"
-        android:layout_toLeftOf="@+id/sale_btn"
         android:layout_toStartOf="@+id/sale_btn" />
 
     <Button
@@ -46,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_margin="@dimen/smallMargin"
-        android:layout_toLeftOf="@+id/quantity_tv"
+        android:layout_toStartOf="@+id/quantity_tv"
         android:focusable="false"
         android:text="@string/sale" />
 
@@ -54,8 +52,18 @@
         android:id="@+id/quantity_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_toStartOf="@id/pcs_tv"
         android:layout_centerVertical="true"
-        android:layout_margin="@dimen/mediumMargin" />
+        android:layout_marginStart="@dimen/mediumMargin"
+        android:layout_marginEnd="@dimen/smallMargin"/>
+
+    <TextView
+        android:id="@+id/pcs_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/smallMargin"
+        android:text="@string/packages"
+        android:layout_centerVertical="true"/>
 
 </RelativeLayout>
