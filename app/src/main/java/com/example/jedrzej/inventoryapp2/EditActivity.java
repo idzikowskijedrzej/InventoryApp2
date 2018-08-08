@@ -27,7 +27,7 @@ import android.widget.Toast;
 import com.example.jedrzej.inventoryapp2.data.BookContract.BookEntry;
 
 public class EditActivity extends AppCompatActivity implements
-        LoaderManager.LoaderCallbacks<Cursor>{
+        LoaderManager.LoaderCallbacks<Cursor> {
 
     // Identifier for the book data loader
     private static final int EXISTING_BOOK_LOADER = 0;
@@ -106,7 +106,7 @@ public class EditActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 int i = Integer.parseInt(quantityEditText.getText().toString().trim());
-                if (i>0) {
+                if (i > 0) {
                     i--;
                 }
                 quantityEditText.setText(String.valueOf(i));
@@ -174,7 +174,7 @@ public class EditActivity extends AppCompatActivity implements
         });
     }
 
-     // Get user input from editor and save book into database.
+    // Get user input from editor and save book into database.
     private void saveBook() {
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
@@ -185,67 +185,62 @@ public class EditActivity extends AppCompatActivity implements
         String priceString = priceEditText.getText().toString().trim();
         String quantityString = quantityEditText.getText().toString().trim();
 
-        // Check if this is supposed to be a new book
-        // and check if all the fields in the editor are blank
-        if (currentBookUri == null &&
-                TextUtils.isEmpty(nameString) && TextUtils.isEmpty(authorString) &&
-                TextUtils.isEmpty(priceString) && category == BookEntry.CATEGORY_UNKNOWN) {
-            // Since no fields were modified, we can return early without creating a new book
-            return;
-        }
-
-        // Create a ContentValues object where column names are the keys,
-        // and book attributes from the editor are the values.
-        ContentValues values = new ContentValues();
-        values.put(BookEntry.COLUMN_BOOK_NAME, nameString);
-        values.put(BookEntry.COLUMN_BOOK_AUTHOR, authorString);
-        values.put(BookEntry.COLUMN_BOOK_CATEGORY, category);
-        values.put(BookEntry.COLUMN_SUPPLIER, supplierString);
-        values.put(BookEntry.COLUMN_SUPPLIER_PHONE, supplierPhoneString);
-
-        // If the price is not provided by the user, use 0 by default
-        int price = 0;
-        if (!TextUtils.isEmpty(priceString)) {
-            price = Integer.parseInt(priceString);
-        }
-        values.put(BookEntry.COLUMN_BOOK_PRICE, price);
-
-        // If quantity is not provided by user use 1 by default
-        int quantity = 1;
-        if (!TextUtils.isEmpty(quantityString)) {
-            quantity = Integer.parseInt(quantityString);
-        }
-        values.put(BookEntry.COLUMN_BOOK_QUANTITY, quantity);
-
-
-        // Determine if this is a new or existing book by checking if currentBookUri is null or not
-        if (currentBookUri == null) {
-            // This is a NEW book, so insert a new book into the provider,
-            // returning the content URI for the new book.
-            Uri newUri = getContentResolver().insert(BookEntry.CONTENT_URI, values);
-
-            // Show a toast message depending on whether or not the insertion was successful.
-            if (newUri == null) {
-                // If the new content URI is null, then there was an error with insertion.
-                Toast.makeText(this, getString(R.string.editor_insert_book_failed),
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                // Otherwise, the insertion was successful and we can display a toast.
-                Toast.makeText(this, getString(R.string.editor_insert_book_successful),
-                        Toast.LENGTH_SHORT).show();
-            }
+        if (nameString.isEmpty() || supplierPhoneString.isEmpty() || supplierString.isEmpty() || priceString.isEmpty() || quantityString.isEmpty()) {
+            Toast.makeText(this, getString(R.string.required_fields_empty),
+                    Toast.LENGTH_LONG).show();
         } else {
 
-            int rowsAffected = getContentResolver().update(currentBookUri, values, null, null);
+            // Create a ContentValues object where column names are the keys,
+            // and book attributes from the editor are the values.
+            ContentValues values = new ContentValues();
+            values.put(BookEntry.COLUMN_BOOK_NAME, nameString);
+            values.put(BookEntry.COLUMN_BOOK_AUTHOR, authorString);
+            values.put(BookEntry.COLUMN_BOOK_CATEGORY, category);
+            values.put(BookEntry.COLUMN_SUPPLIER, supplierString);
+            values.put(BookEntry.COLUMN_SUPPLIER_PHONE, supplierPhoneString);
 
-            // Show a toast message depending on whether or not the update was successful.
-            if (rowsAffected == 0) {
-                Toast.makeText(this, getString(R.string.editor_update_book_failed),
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, getString(R.string.editor_update_book_successful),
-                        Toast.LENGTH_SHORT).show();
+            // If the price is not provided by the user, use 0 by default
+            int price = 0;
+            if (!TextUtils.isEmpty(priceString)) {
+                price = Integer.parseInt(priceString);
             }
+            values.put(BookEntry.COLUMN_BOOK_PRICE, price);
+
+            // If quantity is not provided by user use 1 by default
+            int quantity = 1;
+            if (!TextUtils.isEmpty(quantityString)) {
+                quantity = Integer.parseInt(quantityString);
+            }
+            values.put(BookEntry.COLUMN_BOOK_QUANTITY, quantity);
+
+            // Determine if this is a new or existing book by checking if currentBookUri is null or not
+            if (currentBookUri == null) {
+                // This is a NEW book, so insert a new book into the provider,
+                // returning the content URI for the new book.
+                Uri newUri = getContentResolver().insert(BookEntry.CONTENT_URI, values);
+
+                // Show a toast message depending on whether or not the insertion was successful.
+                if (newUri == null) {
+                    // If the new content URI is null, then there was an error with insertion.
+                    Toast.makeText(this, getString(R.string.editor_insert_book_failed),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    // Otherwise, the insertion was successful and we can display a toast.
+                    Toast.makeText(this, getString(R.string.editor_insert_book_successful),
+                            Toast.LENGTH_SHORT).show();
+                }
+            } else {
+
+                int rowsAffected = getContentResolver().update(currentBookUri, values, null, null);
+                if (rowsAffected == 0) {
+                    Toast.makeText(this, getString(R.string.editor_update_book_failed),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, getString(R.string.editor_update_book_successful),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+            finish();
         }
     }
 
@@ -277,7 +272,6 @@ public class EditActivity extends AppCompatActivity implements
 
             case R.id.action_save:
                 saveBook();
-                finish();
                 return true;
 
             case R.id.action_delete:
@@ -306,7 +300,7 @@ public class EditActivity extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-     // this method is called when the back button is pressed.
+    // this method is called when the back button is pressed.
     @Override
     public void onBackPressed() {
         if (!bookHasChanged) {

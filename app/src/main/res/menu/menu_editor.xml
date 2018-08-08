@@ -12,6 +12,6 @@
 
     <item
         android:id="@+id/action_delete"
-        android:title="action_delete"
+        android:title="Delete book"
         app:showAsAction="never" />
 </menu>

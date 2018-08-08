@@ -44,4 +44,5 @@
     <string name="delete_book_failed">Error with deleting book.</string>
     <string name="delete_book_successful">Book deleted.</string>
     <string name="call_error">Could not call the supplier, try manually.</string>
+    <string name="required_fields_empty">Product name, supplier name, supplier phone, price and quantity are required. Please, update empty fields</string>
 </resources>
