@@ -62,8 +62,6 @@ public class BookCursorAdapter extends CursorAdapter {
             }
         });
 
-        // If the book name or author is empty string or null
-        // sue default text that says "Unknown breed", so the TextView isn't blank.
         if (TextUtils.isEmpty(bookAuthor)) {
             bookAuthor = context.getString(R.string.unknown_author);
         }

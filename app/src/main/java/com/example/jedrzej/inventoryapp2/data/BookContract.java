@@ -34,31 +34,13 @@ public class BookContract {
         public static final String TABLE_NAME = "books";
         public static final String _ID = BaseColumns._ID;
         public static final String COLUMN_BOOK_NAME ="name";
-        public static final String COLUMN_BOOK_CATEGORY = "category";
         public static final String COLUMN_BOOK_PRICE = "price";
         public static final String COLUMN_BOOK_AUTHOR = "author";
         public static final String COLUMN_SUPPLIER = "supplier";
         public static final String COLUMN_SUPPLIER_PHONE = "supplierPhone";
         public static final String COLUMN_BOOK_QUANTITY = "quantity";
 
-        /**
-         * Possible values of book category.
-         */
-        public static final int CATEGORY_UNKNOWN = 0;
-        public static final int CATEGORY_OPEN = 1;
-        public static final int CATEGORY_MATURE = 2;
 
-
-        /**
-         * Returns whether or not the given category is {@link #CATEGORY_UNKNOWN}, {@link #CATEGORY_MATURE},
-         * or {@link #CATEGORY_OPEN}.
-         */
-        public static boolean isValidCategory(int category) {
-            if (category == CATEGORY_UNKNOWN || category == CATEGORY_OPEN || category == CATEGORY_MATURE  ) {
-                return true;
-            }
-            return false;
-        }
     }
 
 }

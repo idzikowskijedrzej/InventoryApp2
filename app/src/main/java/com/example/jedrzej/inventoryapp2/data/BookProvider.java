@@ -99,12 +99,6 @@ public class BookProvider extends ContentProvider {
             throw new IllegalArgumentException("Book requires valid author");
         }
 
-        // Check that the category is valid
-        Integer category = values.getAsInteger(BookEntry.COLUMN_BOOK_CATEGORY);
-        if (category == null || !BookEntry.isValidCategory(category)) {
-            throw new IllegalArgumentException("Book requires valid category");
-        }
-
         Integer price = values.getAsInteger(BookEntry.COLUMN_BOOK_PRICE);
         if (price != null && price < 0){
             throw new IllegalArgumentException("Book requires valid price");
@@ -176,13 +170,6 @@ public class BookProvider extends ContentProvider {
             String name = values.getAsString(BookEntry.COLUMN_BOOK_NAME);
             if (name == null) {
                 throw new IllegalArgumentException("Book requires a name");
-            }
-        }
-
-        if (values.containsKey(BookEntry.COLUMN_BOOK_CATEGORY)) {
-            Integer category = values.getAsInteger(BookEntry.COLUMN_BOOK_CATEGORY);
-            if (category == null || !BookEntry.isValidCategory(category)) {
-                throw new IllegalArgumentException("Book requires valid category");
             }
         }
 

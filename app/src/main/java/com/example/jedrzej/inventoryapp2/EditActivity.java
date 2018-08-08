@@ -17,11 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.jedrzej.inventoryapp2.data.BookContract.BookEntry;
@@ -37,12 +34,10 @@ public class EditActivity extends AppCompatActivity implements
 
     private EditText nameEditText;
     private EditText authorEditText;
-    private Spinner categorySpinner;
     private EditText supplierEditText;
     private EditText supplierPhoneEditText;
     private EditText priceEditText;
     private EditText quantityEditText;
-    private int category = BookEntry.CATEGORY_UNKNOWN;
 
     //Boolean flag that keeps track of whether the book has been edited or not
     private boolean bookHasChanged = false;
@@ -84,7 +79,6 @@ public class EditActivity extends AppCompatActivity implements
         // Find all relevant views that we will need to read user input from
         nameEditText = findViewById(R.id.edit_book_name);
         authorEditText = findViewById(R.id.edit_book_author);
-        categorySpinner = findViewById(R.id.spinner_category);
         supplierEditText = findViewById(R.id.edit_supplier);
         supplierPhoneEditText = findViewById(R.id.edit_supplier_phone);
         priceEditText = findViewById(R.id.edit_book_price);
@@ -135,44 +129,9 @@ public class EditActivity extends AppCompatActivity implements
         supplierEditText.setOnTouchListener(mTouchListener);
         supplierPhoneEditText.setOnTouchListener(mTouchListener);
         priceEditText.setOnTouchListener(mTouchListener);
-        categorySpinner.setOnTouchListener(mTouchListener);
         quantityEditText.setOnTouchListener(mTouchListener);
-
-        setupSpinner();
     }
 
-    //Setup the dropdown spinner that allows the user to select the category of the book.
-    private void setupSpinner() {
-        ArrayAdapter categorySpinnerAdapter = ArrayAdapter.createFromResource(this,
-                R.array.array_category_options, android.R.layout.simple_spinner_item);
-
-        // Specify dropdown layout style - simple list view with 1 item per line
-        categorySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-
-        categorySpinner.setAdapter(categorySpinnerAdapter);
-
-        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selection = (String) parent.getItemAtPosition(position);
-                if (!TextUtils.isEmpty(selection)) {
-                    if (selection.equals(getString(R.string.category_open))) {
-                        category = BookEntry.CATEGORY_OPEN;
-                    } else if (selection.equals(getString(R.string.category_mature))) {
-                        category = BookEntry.CATEGORY_MATURE;
-                    } else {
-                        category = BookEntry.CATEGORY_UNKNOWN;
-                    }
-                }
-            }
-
-            // Because AdapterView is an abstract class, onNothingSelected must be defined
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                category = BookEntry.CATEGORY_UNKNOWN;
-            }
-        });
-    }
 
     // Get user input from editor and save book into database.
     private void saveBook() {
@@ -195,7 +154,6 @@ public class EditActivity extends AppCompatActivity implements
             ContentValues values = new ContentValues();
             values.put(BookEntry.COLUMN_BOOK_NAME, nameString);
             values.put(BookEntry.COLUMN_BOOK_AUTHOR, authorString);
-            values.put(BookEntry.COLUMN_BOOK_CATEGORY, category);
             values.put(BookEntry.COLUMN_SUPPLIER, supplierString);
             values.put(BookEntry.COLUMN_SUPPLIER_PHONE, supplierPhoneString);
 
@@ -327,7 +285,6 @@ public class EditActivity extends AppCompatActivity implements
                 BookEntry._ID,
                 BookEntry.COLUMN_BOOK_NAME,
                 BookEntry.COLUMN_BOOK_AUTHOR,
-                BookEntry.COLUMN_BOOK_CATEGORY,
                 BookEntry.COLUMN_SUPPLIER,
                 BookEntry.COLUMN_SUPPLIER_PHONE,
                 BookEntry.COLUMN_BOOK_PRICE,
@@ -355,7 +312,6 @@ public class EditActivity extends AppCompatActivity implements
             // Find the columns of book attributes that we're interested in
             int nameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_NAME);
             int authorColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_AUTHOR);
-            int categoryColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_CATEGORY);
             int supplierColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER);
             int supplierPhoneColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_PHONE);
             int priceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_PRICE);
@@ -364,7 +320,6 @@ public class EditActivity extends AppCompatActivity implements
             // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
             String author = cursor.getString(authorColumnIndex);
-            int category = cursor.getInt(categoryColumnIndex);
             String supplier = cursor.getString(supplierColumnIndex);
             String supplierPhone = cursor.getString(supplierPhoneColumnIndex);
             int price = cursor.getInt(priceColumnIndex);
@@ -378,20 +333,6 @@ public class EditActivity extends AppCompatActivity implements
             priceEditText.setText(Integer.toString(price));
             quantityEditText.setText(Integer.toString(quantity));
 
-            // Gender is a dropdown spinner, so map the constant value from the database
-            // into one of the dropdown options (0 is Unknown, 1 is Male, 2 is Female).
-            // Then call setSelection() so that option is displayed on screen as the current selection.
-            switch (category) {
-                case BookEntry.CATEGORY_OPEN:
-                    categorySpinner.setSelection(1);
-                    break;
-                case BookEntry.CATEGORY_MATURE:
-                    categorySpinner.setSelection(2);
-                    break;
-                default:
-                    categorySpinner.setSelection(0);
-                    break;
-            }
         }
     }
 
@@ -404,7 +345,6 @@ public class EditActivity extends AppCompatActivity implements
         supplierPhoneEditText.setText("");
         priceEditText.setText("");
         quantityEditText.setText("");
-        categorySpinner.setSelection(0); // Select "Unknown"
     }
 
     /**
