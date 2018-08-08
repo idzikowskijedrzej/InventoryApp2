@@ -13,12 +13,14 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -41,6 +43,8 @@ public class EditActivity extends AppCompatActivity implements
     private EditText supplierPhoneEditText;
     private EditText priceEditText;
     private EditText quantityEditText;
+    private Button increaseQuantity;
+    private Button decreaseQuantity;
 
     private int category = BookEntry.CATEGORY_UNKNOWN;
 
@@ -89,6 +93,29 @@ public class EditActivity extends AppCompatActivity implements
         supplierPhoneEditText = findViewById(R.id.edit_supplier_phone);
         priceEditText = findViewById(R.id.edit_book_price);
         quantityEditText = findViewById(R.id.edit_book_quantity);
+        increaseQuantity = findViewById(R.id.increase_btn);
+        decreaseQuantity = findViewById(R.id.decrease_btn);
+
+        increaseQuantity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int i = Integer.parseInt(quantityEditText.getText().toString().trim());
+                i++;
+                Log.e("iel iel","quantity = "+i);
+                quantityEditText.setText(String.valueOf(i));
+            }
+        });
+
+        decreaseQuantity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int i = Integer.parseInt(quantityEditText.getText().toString().trim());
+                if (i>0) {
+                    i--;
+                }
+                quantityEditText.setText(String.valueOf(i));
+            }
+        });
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes

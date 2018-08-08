@@ -191,7 +191,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/decrease_value"
+            android:id="@+id/decrease_btn"
             android:layout_margin="@dimen/mediumMargin"
             android:text="@string/decrease_value"
             android:layout_width="wrap_content"
