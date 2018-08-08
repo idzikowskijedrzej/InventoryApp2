@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- Style for a category in the editor -->
+    <!-- Style for TextViews in EditActivity -->
     <style name="CategoryStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">0dp</item>
@@ -18,7 +18,7 @@
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
     </style>
 
-    <!-- Style for an EditText field in the editor -->
+    <!-- Style for an EditText in EditActivity -->
     <style name="EditorFieldStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
