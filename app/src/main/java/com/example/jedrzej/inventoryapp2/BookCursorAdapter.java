@@ -36,7 +36,6 @@ public class BookCursorAdapter extends CursorAdapter {
         int nameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_NAME);
         int authorColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_AUTHOR);
         int priceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_PRICE);
-        Log.e("priceColumnIndex = ", " = " + priceColumnIndex);
 
         // Read the book attributes from the Cursor
         String bookName = cursor.getString(nameColumnIndex);

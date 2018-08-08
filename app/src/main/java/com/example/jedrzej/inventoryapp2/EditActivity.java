@@ -38,6 +38,7 @@ public class EditActivity extends AppCompatActivity implements
     private EditText authorEditText;
     private EditText priceEditText;
     private Spinner categorySpinner;
+    private EditText quantityEditText;
 
     private int category = BookEntry.CATEGORY_UNKNOWN;
 
@@ -79,10 +80,11 @@ public class EditActivity extends AppCompatActivity implements
         }
 
         // Find all relevant views that we will need to read user input from
-        nameEditText = (EditText) findViewById(R.id.edit_book_name);
-        authorEditText = (EditText) findViewById(R.id.edit_book_author);
-        priceEditText = (EditText) findViewById(R.id.edit_book_price);
-        categorySpinner = (Spinner) findViewById(R.id.spinner_category);
+        nameEditText = findViewById(R.id.edit_book_name);
+        authorEditText = findViewById(R.id.edit_book_author);
+        priceEditText = findViewById(R.id.edit_book_price);
+        categorySpinner = findViewById(R.id.spinner_category);
+        quantityEditText = findViewById(R.id.edit_book_quantity);
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
@@ -91,6 +93,7 @@ public class EditActivity extends AppCompatActivity implements
         authorEditText.setOnTouchListener(mTouchListener);
         priceEditText.setOnTouchListener(mTouchListener);
         categorySpinner.setOnTouchListener(mTouchListener);
+        quantityEditText.setOnTouchListener(mTouchListener);
 
         setupSpinner();
     }
@@ -135,6 +138,7 @@ public class EditActivity extends AppCompatActivity implements
         String nameString = nameEditText.getText().toString().trim();
         String authorString = authorEditText.getText().toString().trim();
         String priceString = priceEditText.getText().toString().trim();
+        String quantityString = quantityEditText.getText().toString().trim();
 
         // Check if this is supposed to be a new book
         // and check if all the fields in the editor are blank
@@ -151,12 +155,21 @@ public class EditActivity extends AppCompatActivity implements
         values.put(BookEntry.COLUMN_BOOK_NAME, nameString);
         values.put(BookEntry.COLUMN_BOOK_AUTHOR, authorString);
         values.put(BookEntry.COLUMN_BOOK_CATEGORY, category);
+
         // If the price is not provided by the user, use 0 by default
         int price = 0;
         if (!TextUtils.isEmpty(priceString)) {
             price = Integer.parseInt(priceString);
         }
         values.put(BookEntry.COLUMN_BOOK_PRICE, price);
+
+        // If quantity is not provided by user use 1 by default
+        int quantity = 1;
+        if (!TextUtils.isEmpty(quantityString)) {
+            quantity = Integer.parseInt(quantityString);
+        }
+        values.put(BookEntry.COLUMN_BOOK_QUANTITY, quantity);
+
 
         // Determine if this is a new or existing book by checking if currentBookUri is null or not
         if (currentBookUri == null) {
@@ -274,7 +287,8 @@ public class EditActivity extends AppCompatActivity implements
                 BookEntry.COLUMN_BOOK_NAME,
                 BookEntry.COLUMN_BOOK_AUTHOR,
                 BookEntry.COLUMN_BOOK_CATEGORY,
-                BookEntry.COLUMN_BOOK_PRICE };
+                BookEntry.COLUMN_BOOK_PRICE,
+                BookEntry.COLUMN_BOOK_QUANTITY};
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
@@ -297,25 +311,28 @@ public class EditActivity extends AppCompatActivity implements
         if (cursor.moveToFirst()) {
             // Find the columns of book attributes that we're interested in
             int nameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_NAME);
-            int breedColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_AUTHOR);
-            int genderColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_CATEGORY);
-            int weightColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_PRICE);
+            int authorColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_AUTHOR);
+            int categoryColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_CATEGORY);
+            int priceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_PRICE);
+            int quantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_QUANTITY);
 
             // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
-            String breed = cursor.getString(breedColumnIndex);
-            int gender = cursor.getInt(genderColumnIndex);
-            int weight = cursor.getInt(weightColumnIndex);
+            String author = cursor.getString(authorColumnIndex);
+            int category = cursor.getInt(categoryColumnIndex);
+            int price = cursor.getInt(priceColumnIndex);
+            int quantity = cursor.getInt(quantityColumnIndex);
 
             // Update the views on the screen with the values from the database
             nameEditText.setText(name);
-            authorEditText.setText(breed);
-            priceEditText.setText(Integer.toString(weight));
+            authorEditText.setText(author);
+            priceEditText.setText(Integer.toString(price));
+            quantityEditText.setText(Integer.toString(quantity));
 
             // Gender is a dropdown spinner, so map the constant value from the database
             // into one of the dropdown options (0 is Unknown, 1 is Male, 2 is Female).
             // Then call setSelection() so that option is displayed on screen as the current selection.
-            switch (gender) {
+            switch (category) {
                 case BookEntry.CATEGORY_OPEN:
                     categorySpinner.setSelection(1);
                     break;
@@ -335,6 +352,7 @@ public class EditActivity extends AppCompatActivity implements
         nameEditText.setText("");
         authorEditText.setText("");
         priceEditText.setText("");
+        quantityEditText.setText("");
         categorySpinner.setSelection(0); // Select "Unknown" gender
     }
 

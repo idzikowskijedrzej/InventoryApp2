@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements
         values.put(BookEntry.COLUMN_BOOK_AUTHOR, "Author");
         values.put(BookEntry.COLUMN_BOOK_CATEGORY, BookEntry.CATEGORY_UNKNOWN);
         values.put(BookEntry.COLUMN_BOOK_PRICE, 10);
+        values.put(BookEntry.COLUMN_BOOK_QUANTITY, 10);
 
         Uri newUri = getContentResolver().insert(BookEntry.CONTENT_URI, values);
     }
@@ -113,7 +114,8 @@ public class MainActivity extends AppCompatActivity implements
                 BookEntry.COLUMN_BOOK_NAME,
                 BookEntry.COLUMN_BOOK_AUTHOR,
                 BookEntry.COLUMN_BOOK_CATEGORY,
-                BookEntry.COLUMN_BOOK_PRICE};
+                BookEntry.COLUMN_BOOK_PRICE,
+                BookEntry.COLUMN_BOOK_QUANTITY};
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
