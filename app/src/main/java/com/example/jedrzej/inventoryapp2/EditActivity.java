@@ -36,8 +36,10 @@ public class EditActivity extends AppCompatActivity implements
 
     private EditText nameEditText;
     private EditText authorEditText;
-    private EditText priceEditText;
     private Spinner categorySpinner;
+    private EditText supplierEditText;
+    private EditText supplierPhoneEditText;
+    private EditText priceEditText;
     private EditText quantityEditText;
 
     private int category = BookEntry.CATEGORY_UNKNOWN;
@@ -82,8 +84,10 @@ public class EditActivity extends AppCompatActivity implements
         // Find all relevant views that we will need to read user input from
         nameEditText = findViewById(R.id.edit_book_name);
         authorEditText = findViewById(R.id.edit_book_author);
-        priceEditText = findViewById(R.id.edit_book_price);
         categorySpinner = findViewById(R.id.spinner_category);
+        supplierEditText = findViewById(R.id.edit_supplier);
+        supplierPhoneEditText = findViewById(R.id.edit_supplier_phone);
+        priceEditText = findViewById(R.id.edit_book_price);
         quantityEditText = findViewById(R.id.edit_book_quantity);
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
@@ -91,6 +95,8 @@ public class EditActivity extends AppCompatActivity implements
         // or not, if the user tries to leave the editor without saving.
         nameEditText.setOnTouchListener(mTouchListener);
         authorEditText.setOnTouchListener(mTouchListener);
+        supplierEditText.setOnTouchListener(mTouchListener);
+        supplierPhoneEditText.setOnTouchListener(mTouchListener);
         priceEditText.setOnTouchListener(mTouchListener);
         categorySpinner.setOnTouchListener(mTouchListener);
         quantityEditText.setOnTouchListener(mTouchListener);
@@ -137,6 +143,8 @@ public class EditActivity extends AppCompatActivity implements
         // Use trim to eliminate leading or trailing white space
         String nameString = nameEditText.getText().toString().trim();
         String authorString = authorEditText.getText().toString().trim();
+        String supplierString = supplierEditText.getText().toString().trim();
+        String supplierPhoneString = supplierEditText.getText().toString().trim();
         String priceString = priceEditText.getText().toString().trim();
         String quantityString = quantityEditText.getText().toString().trim();
 
@@ -155,6 +163,8 @@ public class EditActivity extends AppCompatActivity implements
         values.put(BookEntry.COLUMN_BOOK_NAME, nameString);
         values.put(BookEntry.COLUMN_BOOK_AUTHOR, authorString);
         values.put(BookEntry.COLUMN_BOOK_CATEGORY, category);
+        values.put(BookEntry.COLUMN_SUPPLIER, supplierString);
+        values.put(BookEntry.COLUMN_SUPPLIER_PHONE, supplierPhoneString);
 
         // If the price is not provided by the user, use 0 by default
         int price = 0;
@@ -287,6 +297,8 @@ public class EditActivity extends AppCompatActivity implements
                 BookEntry.COLUMN_BOOK_NAME,
                 BookEntry.COLUMN_BOOK_AUTHOR,
                 BookEntry.COLUMN_BOOK_CATEGORY,
+                BookEntry.COLUMN_SUPPLIER,
+                BookEntry.COLUMN_SUPPLIER_PHONE,
                 BookEntry.COLUMN_BOOK_PRICE,
                 BookEntry.COLUMN_BOOK_QUANTITY};
 
@@ -313,6 +325,8 @@ public class EditActivity extends AppCompatActivity implements
             int nameColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_NAME);
             int authorColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_AUTHOR);
             int categoryColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_CATEGORY);
+            int supplierColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER);
+            int supplierPhoneColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_SUPPLIER_PHONE);
             int priceColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_PRICE);
             int quantityColumnIndex = cursor.getColumnIndex(BookEntry.COLUMN_BOOK_QUANTITY);
 
@@ -320,12 +334,16 @@ public class EditActivity extends AppCompatActivity implements
             String name = cursor.getString(nameColumnIndex);
             String author = cursor.getString(authorColumnIndex);
             int category = cursor.getInt(categoryColumnIndex);
+            String supplier = cursor.getString(supplierColumnIndex);
+            String supplierPhone = cursor.getString(supplierPhoneColumnIndex);
             int price = cursor.getInt(priceColumnIndex);
             int quantity = cursor.getInt(quantityColumnIndex);
 
             // Update the views on the screen with the values from the database
             nameEditText.setText(name);
             authorEditText.setText(author);
+            supplierEditText.setText(supplier);
+            supplierPhoneEditText.setText(supplierPhone);
             priceEditText.setText(Integer.toString(price));
             quantityEditText.setText(Integer.toString(quantity));
 
@@ -351,9 +369,11 @@ public class EditActivity extends AppCompatActivity implements
         // If the loader is invalidated, clear out all the data from the input fields.
         nameEditText.setText("");
         authorEditText.setText("");
+        supplierEditText.setText("");
+        supplierPhoneEditText.setText("");
         priceEditText.setText("");
         quantityEditText.setText("");
-        categorySpinner.setSelection(0); // Select "Unknown" gender
+        categorySpinner.setSelection(0); // Select "Unknown"
     }
 
     /**

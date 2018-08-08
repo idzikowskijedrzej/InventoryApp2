@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements
         values.put(BookEntry.COLUMN_BOOK_NAME, "Book");
         values.put(BookEntry.COLUMN_BOOK_AUTHOR, "Author");
         values.put(BookEntry.COLUMN_BOOK_CATEGORY, BookEntry.CATEGORY_UNKNOWN);
+        values.put(BookEntry.COLUMN_SUPPLIER, "Supplier");
+        values.put(BookEntry.COLUMN_SUPPLIER_PHONE, "123456789");
         values.put(BookEntry.COLUMN_BOOK_PRICE, 10);
         values.put(BookEntry.COLUMN_BOOK_QUANTITY, 10);
 
@@ -114,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements
                 BookEntry.COLUMN_BOOK_NAME,
                 BookEntry.COLUMN_BOOK_AUTHOR,
                 BookEntry.COLUMN_BOOK_CATEGORY,
+                BookEntry.COLUMN_SUPPLIER,
+                BookEntry.COLUMN_SUPPLIER_PHONE,
                 BookEntry.COLUMN_BOOK_PRICE,
                 BookEntry.COLUMN_BOOK_QUANTITY};
 

@@ -115,6 +115,17 @@ public class BookProvider extends ContentProvider {
             throw new IllegalArgumentException("Book requires valid quantity");
         }
 
+        String supplier = values.getAsString(BookEntry.COLUMN_SUPPLIER);
+        if (supplier == null) {
+            throw new IllegalArgumentException("Book requires supplier");
+        }
+
+        // If the author is provided, check that it's greater than or equal to 0 kg
+        String supplierPhone = values.getAsString(BookEntry.COLUMN_SUPPLIER_PHONE);
+        if (supplierPhone == null) {
+            throw new IllegalArgumentException("Supplier requires phone number");
+        }
+
 
 
         // No need to check the breed, any value is valid (including null).
@@ -193,6 +204,20 @@ public class BookProvider extends ContentProvider {
             Integer quantity = values.getAsInteger(BookEntry.COLUMN_BOOK_QUANTITY);
             if (quantity == null) {
                 throw new IllegalArgumentException("Book requires valid quantity");
+            }
+        }
+
+        if (values.containsKey(BookEntry.COLUMN_SUPPLIER)) {
+            String supplier = values.getAsString(BookEntry.COLUMN_SUPPLIER);
+            if (supplier == null) {
+                throw new IllegalArgumentException("Book requires a name");
+            }
+        }
+
+        if (values.containsKey(BookEntry.COLUMN_SUPPLIER_PHONE)) {
+            String supplierPhone = values.getAsString(BookEntry.COLUMN_SUPPLIER_PHONE);
+            if (supplierPhone == null) {
+                throw new IllegalArgumentException("Book requires a name");
             }
         }
 

@@ -12,13 +12,17 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EditActivity"></activity>
+        <activity android:name=".EditActivity" />
+
         <provider
-            android:authorities="com.example.jedrzej.inventoryapp2"
             android:name=".data.BookProvider"
-            android:exported="false"/>
+            android:authorities="com.example.jedrzej.inventoryapp2"
+            android:exported="false" />
+
     </application>
+
 </manifest>
