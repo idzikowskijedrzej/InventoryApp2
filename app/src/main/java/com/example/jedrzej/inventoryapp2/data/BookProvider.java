@@ -110,6 +110,11 @@ public class BookProvider extends ContentProvider {
             throw new IllegalArgumentException("Book requires valid price");
         }
 
+        Integer quantity = values.getAsInteger(BookEntry.COLUMN_BOOK_QUANTITY);
+        if (quantity != null && quantity < 0){
+            throw new IllegalArgumentException("Book requires valid quantity");
+        }
+
 
 
         // No need to check the breed, any value is valid (including null).
@@ -181,6 +186,13 @@ public class BookProvider extends ContentProvider {
             Integer price = values.getAsInteger(BookEntry.COLUMN_BOOK_PRICE);
             if (price == null) {
                 throw new IllegalArgumentException("Book requires valid price");
+            }
+        }
+
+        if (values.containsKey(BookEntry.COLUMN_BOOK_QUANTITY)) {
+            Integer quantity = values.getAsInteger(BookEntry.COLUMN_BOOK_QUANTITY);
+            if (quantity == null) {
+                throw new IllegalArgumentException("Book requires valid quantity");
             }
         }
 
