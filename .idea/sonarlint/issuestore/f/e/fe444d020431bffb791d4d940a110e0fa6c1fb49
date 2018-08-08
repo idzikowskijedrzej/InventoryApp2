@@ -1,0 +1,6 @@
+
+Z"squid:SwitchLastCaseIsDefaultCheck""Add a default case to this switch.(øå´¡ÿÿÿÿÿ8À‚¨…Ñ,
+lsquid:S1301"KReplace this "switch" statement by "if" statements to increase readability.(øå´¡ÿÿÿÿÿ8À‚¨…Ñ,
+Gsquid:S1481"+Remove this unused "newUri" local variable.(»ãÇâ8À‚¨…Ñ,
+Vsquid:S1854":Remove this useless assignment to local variable "newUri".(»ãÇâ8À‚¨…Ñ,
+jsquid:MaximumInheritanceDepth"<This class has 7 parents which is greater than 5 authorized.(ó¡‚­8À‚¨…Ñ,
