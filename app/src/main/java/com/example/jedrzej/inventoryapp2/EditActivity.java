@@ -38,6 +38,9 @@ public class EditActivity extends AppCompatActivity implements
     private EditText supplierPhoneEditText;
     private EditText priceEditText;
     private EditText quantityEditText;
+    private Button increaseQuantity;
+    private Button decreaseQuantity;
+    private Button callSupplier;
 
     //Boolean flag that keeps track of whether the book has been edited or not
     private boolean bookHasChanged = false;
@@ -83,9 +86,9 @@ public class EditActivity extends AppCompatActivity implements
         supplierPhoneEditText = findViewById(R.id.edit_supplier_phone);
         priceEditText = findViewById(R.id.edit_book_price);
         quantityEditText = findViewById(R.id.edit_book_quantity);
-        Button increaseQuantity = findViewById(R.id.increase_btn);
-        Button decreaseQuantity = findViewById(R.id.decrease_btn);
-        Button callSupplier = findViewById(R.id.call_btn);
+        increaseQuantity = findViewById(R.id.increase_btn);
+        decreaseQuantity = findViewById(R.id.decrease_btn);
+        callSupplier = findViewById(R.id.call_btn);
 
         increaseQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,10 +133,25 @@ public class EditActivity extends AppCompatActivity implements
         supplierPhoneEditText.setOnTouchListener(mTouchListener);
         priceEditText.setOnTouchListener(mTouchListener);
         quantityEditText.setOnTouchListener(mTouchListener);
+
+        setClickability();
     }
 
+    private  void setClickability(){
+        if (((quantityEditText.getText().toString().trim()).isEmpty())) {
+            increaseQuantity.setClickable(false);
+            decreaseQuantity.setClickable(false);
+        } else {
+            increaseQuantity.setClickable(true);
+            decreaseQuantity.setClickable(true);
+        }
+        if (((supplierPhoneEditText.getText().toString().trim()).isEmpty())) {
+            callSupplier.setClickable(false);
+        } else {
+            callSupplier.setClickable(true);
+        }
+    }
 
-    // Get user input from editor and save book into database.
     private void saveBook() {
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
@@ -333,6 +351,7 @@ public class EditActivity extends AppCompatActivity implements
             priceEditText.setText(Integer.toString(price));
             quantityEditText.setText(Integer.toString(quantity));
 
+            setClickability();
         }
     }
 
@@ -345,6 +364,7 @@ public class EditActivity extends AppCompatActivity implements
         supplierPhoneEditText.setText("");
         priceEditText.setText("");
         quantityEditText.setText("");
+        setClickability();
     }
 
     /**
