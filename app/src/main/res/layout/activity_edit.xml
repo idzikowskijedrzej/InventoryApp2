@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/edit_activity_parent"
     android:layout_width="match_parent"
@@ -9,18 +8,15 @@
     android:padding="@dimen/largeMargin"
     tools:context=".EditActivity">
 
-    <!-- Overview category -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Label -->
         <TextView
             style="@style/CategoryStyle"
             android:text="@string/book_overview" />
 
-        <!-- Input fields -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -28,14 +24,12 @@
             android:orientation="vertical"
             android:paddingLeft="4dp">
 
-            <!-- Name field -->
             <EditText
                 android:id="@+id/edit_book_name"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/book_hint_name"
                 android:inputType="textCapWords" />
 
-            <!-- Breed field -->
             <EditText
                 android:id="@+id/edit_book_author"
                 style="@style/EditorFieldStyle"
@@ -51,19 +45,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Label -->
         <TextView
             style="@style/CategoryStyle"
             android:text="@string/book_supplier" />
 
-        <!-- Input fields -->
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:paddingLeft="4dp">
 
-            <!-- Weight field -->
             <EditText
                 android:id="@+id/edit_supplier"
                 style="@style/EditorFieldStyle"
@@ -79,19 +70,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Label -->
         <TextView
             style="@style/CategoryStyle"
             android:text="@string/book_supplier_phone" />
 
-        <!-- Input fields -->
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:paddingLeft="4dp">
 
-            <!-- Weight field -->
             <EditText
                 android:id="@+id/edit_supplier_phone"
                 style="@style/EditorFieldStyle"
@@ -101,26 +89,22 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <!-- Measurement category -->
     <LinearLayout
         android:id="@+id/container_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Label -->
         <TextView
             style="@style/CategoryStyle"
             android:text="@string/book_price" />
 
-        <!-- Input fields -->
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:paddingLeft="4dp">
 
-            <!-- Weight field -->
             <EditText
                 android:id="@+id/edit_book_price"
                 style="@style/EditorFieldStyle"
@@ -136,19 +120,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Label -->
         <TextView
             style="@style/CategoryStyle"
             android:text="@string/book_quantity" />
 
-        <!-- Input fields -->
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:paddingLeft="4dp">
 
-            <!-- Weight field -->
             <EditText
                 android:id="@+id/edit_book_quantity"
                 style="@style/EditorFieldStyle"
@@ -164,6 +145,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/decrease_btn"
             android:layout_width="wrap_content"
@@ -187,5 +169,5 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/mediumMargin"
         android:gravity="center"
-        android:text="@string/call_supplier"/>
+        android:text="@string/call_supplier" />
 </LinearLayout>

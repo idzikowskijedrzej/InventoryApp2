@@ -38,16 +38,16 @@
         android:layout_marginEnd="@dimen/mediumMargin"
         android:layout_marginRight="@dimen/mediumMargin"
         android:layout_toLeftOf="@+id/sale_btn"
-        android:layout_toStartOf="@+id/sale_btn"/>
+        android:layout_toStartOf="@+id/sale_btn" />
 
     <Button
         android:id="@+id/sale_btn"
-        android:focusable="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/quantity_tv"
         android:layout_centerVertical="true"
         android:layout_margin="@dimen/smallMargin"
+        android:layout_toLeftOf="@+id/quantity_tv"
+        android:focusable="false"
         android:text="@string/sale" />
 
     <TextView
@@ -56,6 +56,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_margin="@dimen/mediumMargin"/>
+        android:layout_margin="@dimen/mediumMargin" />
 
 </RelativeLayout>
