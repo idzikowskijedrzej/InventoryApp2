@@ -140,7 +140,7 @@ public class EditActivity extends AppCompatActivity implements
         String nameString = nameEditText.getText().toString().trim();
         String authorString = authorEditText.getText().toString().trim();
         String supplierString = supplierEditText.getText().toString().trim();
-        String supplierPhoneString = supplierEditText.getText().toString().trim();
+        String supplierPhoneString = supplierPhoneEditText.getText().toString().trim();
         String priceString = priceEditText.getText().toString().trim();
         String quantityString = quantityEditText.getText().toString().trim();
 
